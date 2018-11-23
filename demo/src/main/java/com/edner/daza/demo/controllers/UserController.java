@@ -46,7 +46,8 @@ public class UserController {
 		User user = this.mapper.readValue(userJson, User.class);
 		
 		if(user.getId() == null) {
-			throw new Exception("el id está nulo");
+			return new RestResponse(HttpStatus.NOT_ACCEPTABLE.value(), "el id está nulo");
+			//throw new Exception("el id está nulo");
 		}
 		
 		this.userService.deleteUser(user.getId());
