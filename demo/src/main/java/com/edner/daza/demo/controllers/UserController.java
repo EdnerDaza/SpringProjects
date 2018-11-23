@@ -41,8 +41,7 @@ public class UserController {
 	
 	@RequestMapping(value="/getUsers", method=RequestMethod.GET)
 	public List<User> getUsers() {
-		this.userService.findAll();
-		return null;
+		return this.userService.findAll();
 	}
 	
 	private boolean validate(User user) {
