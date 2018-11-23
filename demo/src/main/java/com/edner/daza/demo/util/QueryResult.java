@@ -2,7 +2,7 @@ package com.edner.daza.demo.util;
 
 import java.util.List;
 
-public class QueryResponse {
+public class QueryResult {
 	
 	private int totalRecords;
 	private List<Object> list;
