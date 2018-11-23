@@ -28,8 +28,8 @@ public class UserController {
 	
 	protected ObjectMapper mapper;
 	
-	@RequestMapping(value="/SaveOrUpdate", method=RequestMethod.POST)
-	public RestResponse SaveOrUpdate(@RequestBody String userJson) throws JsonParseException, JsonMappingException, IOException {
+	@RequestMapping(value="/saveOrUpdate", method=RequestMethod.POST)
+	public RestResponse saveOrUpdate(@RequestBody String userJson) throws JsonParseException, JsonMappingException, IOException {
 		this.mapper = new ObjectMapper();
 		User user = this.mapper.readValue(userJson, User.class);
 		if(!this.validate(user)) {
@@ -37,6 +37,21 @@ public class UserController {
 		}
 		this.userService.save(user);
 		return new RestResponse(HttpStatus.OK.value(), "Operación Existosa");
+	}
+	
+	
+	@RequestMapping(value="/deleteUser", method=RequestMethod.POST)
+	public RestResponse deleteUser(@RequestBody String userJson) throws Exception {
+		this.mapper = new ObjectMapper();
+		User user = this.mapper.readValue(userJson, User.class);
+		
+		if(user.getId() == null) {
+			throw new Exception("el id está nulo");
+		}
+		
+		this.userService.deleteUser(user.getId());
+		
+		return null;
 	}
 	
 	@RequestMapping(value="/getUsers", method=RequestMethod.GET)
